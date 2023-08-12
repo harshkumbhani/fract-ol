@@ -1,3 +1,7 @@
 fractol.pdf
 fractol
 objs/
+.vscode/
+fractol.txt
+objs
+srcs/myLib/objs/
