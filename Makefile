@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/09 13:28:29 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/15 12:44:04 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC			=
 
 SRCS = fractol.c
 OBJS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
+DEPS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.d})
 
 ################################################################################
 #                                 Makefile logic                               #
@@ -101,3 +102,5 @@ norm: $(SRCS)
 re: fclean all
 
 .PHONY: all clean fclean re $(LIBFT_LIB)
+
+-include $(DEPS)
