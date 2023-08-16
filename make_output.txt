@@ -1,4 +1,0 @@
-make[1]: Entering directory '/home/harsh/Desktop/project/fract-ol/srcs/myLib'
-Compiling Libft.a library...
-
-make[1]: Leaving directory '/home/harsh/Desktop/project/fract-ol/srcs/myLib'
