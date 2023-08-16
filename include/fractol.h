@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/11 08:56:57 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/16 22:54:33 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../srcs/myLib/header/library.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# include <math.h>
 
 # ifndef WIDTH
 #  define WIDTH 1000
@@ -24,11 +25,13 @@
 #  define HEIGHT 1000
 # endif
 
+# define PI			3.14159
 # define MAX_ITERATIONS 100
-# define X_MIN			-2
-# define X_MAX			2
-# define Y_MIN			-2
-# define Y_MAX			2
+
+# define X_MIN			-2.5
+# define X_MAX			1.0
+# define Y_MIN			-1.5
+# define Y_MAX			1.5
 
 typedef struct s_img
 {
