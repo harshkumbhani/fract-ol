@@ -2,4 +2,6 @@ fractol.pdf
 fractol
 objs/
 srcs/myLib/objs/
+srcs/myLib/libft
+srcs/myLib/make_output.txt
 make_output.txt
