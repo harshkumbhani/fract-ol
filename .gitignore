@@ -2,7 +2,7 @@ fractol.pdf
 fractol
 objs/
 srcs/myLib/objs/
-srcs/myLib/libft
+srcs/myLib/libft.a
 srcs/myLib/make_output.txt
 make_output.txt
 .DS_Store
