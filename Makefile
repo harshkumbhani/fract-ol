@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/17 07:33:03 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/17 10:43:05 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,15 +37,15 @@ endif
 
 OBJDIR		= ./objs
 
-VPATH		= .
+VPATH		= .:./srcs/init:./srcs/manual
 
 SRC			=
-
+SRCS_MAN	= argument_manual.c
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
 
-SRCS = fractol.c
+SRCS = fractol.c init.c $(SRCS_MAN)
 OBJS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 DEPS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.d})
 

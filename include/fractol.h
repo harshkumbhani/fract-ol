@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/17 07:36:46 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/17 11:00:17 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 #  define HEIGHT 1000
 # endif
 
-# define PI			3.14159
-# define MAX_ITERATIONS 100
+# define PI				3.14159
 
 # define X_MIN			-2.5
 # define X_MAX			1.0
@@ -53,15 +52,33 @@ union u_color
 	t_color	c;
 };
 
-typedef struct	s_fractal
+typedef struct	s_fractol
 {
 	t_img	img;
+	char	*name;
+	int		x;
+	int		y;
+	int		xmax;
+	int		xmin;
+	int		ymax;
+	int		ymin;
 	double	c_re;
 	double	c_im;
 	double	zx;
 	double	zy;
-	double	product;
-	int		iteration;
-}	t_fractal;
+	double	tmp;
+	int		iter;
+	int		max_iter;
+}	t_fractol;
+
+// Function declatrations for printing manuals
+void			manual_and_exit(void);
+
+//Function definition for inits
+void			init(t_fractol *fractol);
+int				init_mlx(t_fractol *fractol);
+
+union u_color	color_pix(int iterations);
+void			_put_pixel(mlx_image_t *img, int x, int y);
 
 #endif

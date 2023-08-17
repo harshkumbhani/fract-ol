@@ -1,0 +1,5 @@
+fractol usage:
+./fractol <fractal> 
+
+List of available fractals:
+Manedelbrot, Julia
