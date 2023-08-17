@@ -1,0 +1,9 @@
+{
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/hkumbhan/Documents/projects/fractol",
+			"binaryPath": "/Users/hkumbhan/Documents/projects/fractol/fractol",
+			"binaryArgs": []
+		}
+	]
+}

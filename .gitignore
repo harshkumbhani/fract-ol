@@ -1,7 +1,8 @@
 fractol.pdf
 fractol
 objs/
-.vscode/
-fractol.txt
-objs
 srcs/myLib/objs/
+srcs/myLib/libft.a
+srcs/myLib/make_output.txt
+make_output.txt
+.DS_Store

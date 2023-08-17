@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/15 12:44:04 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/17 07:33:03 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,18 @@ NAME 		= fractol
 CC			= cc
 CFLAGS 		= -Wall -Wextra -Werror -MMD -MP -I./include -I./srcs/myLib/header -g
 MLX_LIB		= ./MLX42/build/libmlx42.a
-MLX			= -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT_DIR 	= ./srcs/myLib
 LIBFT_LIB 	= ./srcs/myLib/libft.a
+# MLX			= -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
+# MLX			= -ldl -lglfw -pthread -lm
 
+OS := $(shell uname)
+
+ifeq ($(OS), Darwin)
+	MLX = -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
+else ifeq ($(OS), Linux)
+	MLX = -ldl -lglfw -pthread -lm
+endif
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -59,10 +67,12 @@ COM_STRING   = "Compiling"
 ################################################################################
 
 all: $(NAME)
+	@echo
+	@echo "$(OBJ_COLOR)$(OS)$(NO_COLOR):  $(MLX)"
 
 $(NAME): $(OBJS) $(LIBFT_LIB)
 	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
-	@$(CC) $(CFLAGS) $(MLX) $(MLX_LIB) $(OBJS) $(LIBFT_LIB) -o $@
+	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(MLX_LIB) $(MLX) $(LIBFT_LIB)
 
 $(LIBFT_LIB):
 	@make re -C $(LIBFT_DIR) > make_output.txt 2>&1; \
