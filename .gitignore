@@ -6,3 +6,5 @@ srcs/myLib/libft.a
 srcs/myLib/make_output.txt
 make_output.txt
 .DS_Store
+fractol_test.c
+fractol.txt
