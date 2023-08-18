@@ -9,3 +9,6 @@ make_output.txt
 fractol_test.c
 fractol.txt
 LICENSE
+*a.out
+*.dSYM
+*program

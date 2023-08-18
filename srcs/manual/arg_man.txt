@@ -1,5 +1,16 @@
-fractol usage:
-./fractol <fractal> 
+Fractol usage: ./fractol <fractal> <c_re> <c_im>
 
 List of available fractals:
-Manedelbrot, Julia
+
+Mandelbrot
+Julia
+
+For Julia you can choose a set from the following:
+
+Set:	c_re	c_im
+
+1.		-0.7	0.27015
+2.		-0.8	0.156
+3.		0.355	0.355
+4.		-0.4	0.6
+5.		0.285	0
