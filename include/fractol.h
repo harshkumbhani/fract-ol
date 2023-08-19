@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/18 16:44:42 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/19 14:43:00 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define Y_MIN			-2.0
 # define Y_MAX			2.0
 
-#define MAX_ITERATIONS 60
+#define MAX_ITERATIONS 100
 
 typedef struct s_img
 {
