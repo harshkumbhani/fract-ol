@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/18 15:13:37 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/21 16:06:11 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ CFLAGS 		= -Wall -Wextra -Werror -MMD -MP -I./include -I./srcs/myLib/header -g
 MLX_LIB		= ./MLX42/build/libmlx42.a
 LIBFT_DIR 	= ./srcs/myLib
 LIBFT_LIB 	= ./srcs/myLib/libft.a
-# MLX			= -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
-# MLX			= -ldl -lglfw -pthread -lm
 
 OS := $(shell uname)
 

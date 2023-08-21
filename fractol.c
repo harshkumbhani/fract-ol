@@ -3,27 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:23:46 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/21 11:29:39 by harsh            ###   ########.fr       */
+/*   Updated: 2023/08/21 18:53:08 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
+//#include <execinfo.h>
+//#include <signal.h>
 //void	check_leaks(void)
 //{
 //	system("leaks fractol");
 //}
+
+//void segfault_sigaction(int signal, siginfo_t *si, void *arg) {
+//    void *error_addr = si->si_addr;
+//    void *array[10];
+//    size_t size;
+
+//	(void)signal;
+//	(void)arg;
+//    // get void*'s for all entries on the stack
+//    size = backtrace(array, 10);
+
+//    fprintf(stderr, "Error at address: 0x%lx\n", (long)error_addr);
+
+//    // print out all the frames to stderr
+//    backtrace_symbols_fd(array, size, STDERR_FILENO);
+
+//    exit(1);
+//}
+void	clean_exit(t_fractol *fractol)
+{
+	mlx_delete_image(fractol->img.mlx, fractol->img.img);
+	mlx_close_window(fractol->img.mlx);
+	mlx_terminate(fractol->img.mlx);
+	exit(EXIT_SUCCESS);
+}
 
 int	main(int argc, char *argv[])
 {
 	t_fractol	fractol;
 	(void)argv;
 
+	//struct sigaction sa;
+
+    //sa.sa_flags = SA_SIGINFO;
+    //sa.sa_sigaction = segfault_sigaction;
+    //sigemptyset(&sa.sa_mask);
+    //sigaction(SIGSEGV, &sa, NULL);
 	fractol = (t_fractol){};
-	//atexit(check_leaks);
 	if (argc < 2)
 		manual_and_exit();
 	//if (_check_argv(argv) = EXIT_FAILURE)
@@ -36,180 +67,94 @@ int	main(int argc, char *argv[])
 		return (1);
 	mlx_key_hook(fractol.img.mlx, &handle_key, &fractol);
 	mlx_scroll_hook(fractol.img.mlx, &scroll_hook, &fractol);
-	mlx_close_hook(fractol.img.mlx, NULL, NULL);
 	mlx_image_to_window(fractol.img.mlx, fractol.img.img, fractol.x, fractol.y);
 	if (ft_strncmp(argv[1], "Mandelbrot", 10) == 0)
 	{
 		_put_pixel(&fractol);
 		mlx_loop(fractol.img.mlx);
-		mlx_terminate(fractol.img.mlx);
 	}
-	return (0);
+	//mlx_delete_image(fractol.img.mlx, fractol.img.img);
+	//mlx_close_window(fractol.img.mlx);
+	//mlx_terminate(fractol.img.mlx);
+	clean_exit(&fractol);
+	return (EXIT_SUCCESS);
 }
-
-
-// int key_hook(int key_code, t_fractol *fractol)
-// {
-// 	double	x_range, y_range, pan_factor;
-
-// 	x_range = fractol->xmax - fractol->xmin;
-// 	y_range = fractol->ymax - fractol->ymin;
-// 	pan_factor = 0.05;  // Adjust this as per your needs
-
-// 	if (key_code == ESC)
-// 		exit(1);
-// 	else if (key_code == LEFT)
-// 	{
-// 		fractol->xmin -= x_range * pan_factor;
-// 		fractol->xmax -= x_range * pan_factor;
-// 	}
-// 	else if (key_code == RIGHT)
-// 	{
-// 		fractol->xmin += x_range * pan_factor;
-// 		fractol->xmax += x_range * pan_factor;
-// 	}
-// 	else if (key_code == UP)
-// 	{
-// 		fractol->ymin -= y_range * pan_factor;
-// 		fractol->ymax -= y_range * pan_factor;
-// 	}
-// 	else if (key_code == DOWN)
-// 	{
-// 		fractol->ymin += y_range * pan_factor;
-// 		fractol->ymax += y_range * pan_factor;
-// 	}
-// 	// ... other key conditions remain unchanged
-
-// 	_put_pixel(fractol);  // Or whatever your draw/redraw function is named
-// 	return (0);
-// }
-
-
 void	handle_key(mlx_key_data_t key, void *param)
 {
 	t_fractol	*fractol;
-	double		shift;
+	double		x_range;
+	double		y_range;
+	double		pan_factor;
 
 	fractol = (t_fractol *)param;
+	x_range = fractol->xmax - fractol->xmin;
+	y_range = fractol->ymax - fractol->ymin;
+	pan_factor = 0.05;
 	if (key.key == MLX_KEY_ESCAPE)
-		exit(0);
+		clean_exit(fractol); // write function to clean exit in utils.
 	if (key.key == 'R')
 		init(fractol);
-	shift = fractol->zoom * 0.05;
 	if (key.key == MLX_KEY_LEFT)
 	{
-		fractol->xmin -= shift;
-		fractol->xmax -= shift;
+		fractol->xmin += x_range * pan_factor;
+		fractol->xmax += x_range * pan_factor;
 	}
 	if (key.key == MLX_KEY_RIGHT)
 	{
-		fractol->xmin += shift;
-		fractol->xmax += shift;
+		fractol->xmin -= x_range * pan_factor;
+		fractol->xmax -= x_range * pan_factor;
 	}
 	if (key.key == MLX_KEY_UP)
 	{
-		fractol->ymin -= shift;
-		fractol->ymax -= shift;
+		fractol->ymin -= y_range * pan_factor;
+		fractol->ymax -= y_range * pan_factor;
 	}
 	if (key.key == MLX_KEY_DOWN)
 	{
-		fractol->ymin += shift;
-		fractol->ymax += shift;
+		fractol->ymin += y_range * pan_factor;
+		fractol->ymax += y_range * pan_factor;
 	}
 	_put_pixel(fractol);
 }
 
-//void scroll_hook(double xdelta, double ydelta, void *param)
-//{
-//    t_fractol *fractol;
-//    double zoom_factor = 1.05;  // Adjust this value as necessary for desired zoom rate
-
-//    fractol = (t_fractol *)param;
-//    (void)xdelta;
-
-//    double width = fractol->xmax - fractol->xmin;
-//    double height = fractol->ymax - fractol->ymin;
-//    double width_diff, height_diff;
-
-//    if (ydelta > 0) // Zooming in
-//    {
-//        width_diff = width * (1.0 - 1.0/zoom_factor) * 0.5;
-//        height_diff = height * (1.0 - 1.0/zoom_factor) * 0.5;
-//    }
-//    else  // Zooming out
-//    {
-//        width_diff = width * (zoom_factor - 1.0) * 0.5;
-//        height_diff = height * (zoom_factor - 1.0) * 0.5;
-//    }
-
-//    // Adjust boundaries
-//    fractol->xmin += width_diff;
-//    fractol->xmax -= width_diff;
-//    fractol->ymin += height_diff;
-//    fractol->ymax -= height_diff;
-
-//    _put_pixel(fractol);
-//}
-
-void scroll_hook(double xdelta, double ydelta, void *param)
+void zoom(t_fractol *fractol, int x, int y, double zoom_factor)
 {
-	t_fractol	*fractol;
-	double		x_range, y_range, zoom_factor;
-
-	fractol = (t_fractol *)param;
-	(void)xdelta;
+	double x_range;
+	double y_range;
+	double x_math;
+	double y_math;
+	double new_x_range;
+	double new_y_range;
 
 	x_range = fractol->xmax - fractol->xmin;
 	y_range = fractol->ymax - fractol->ymin;
-	zoom_factor = 0.1;  // Adjust this as per your needs
-
-	if (ydelta > 0)  // zooming in
-	{
-		fractol->xmin += x_range * zoom_factor;
-		fractol->xmax -= x_range * zoom_factor;
-		fractol->ymin += y_range * zoom_factor;
-		fractol->ymax -= y_range * zoom_factor;
-	}
-	else if (ydelta < 0)  // zooming out
-	{
-		fractol->xmin -= x_range * zoom_factor;
-		fractol->xmax += x_range * zoom_factor;
-		fractol->ymin -= y_range * zoom_factor;
-		fractol->ymax += y_range * zoom_factor;
-	}
-	_put_pixel(fractol);
+	x_math = fractol->xmin + ((double)x / WIDTH) * x_range;
+	y_math = fractol->ymin + (1 - (double)y / HEIGHT) * y_range;
+	new_x_range = x_range / zoom_factor;
+	new_y_range = y_range / zoom_factor;
+	fractol->xmin = x_math - ((double)x / WIDTH) * new_x_range;
+	fractol->xmax = fractol->xmin + new_x_range;
+	fractol->ymin = y_math - (1 - (double)y / HEIGHT) * new_y_range;
+	fractol->ymax = fractol->ymin + new_y_range;
 }
 
+void scroll_hook(double xdelta, double ydelta, void *param)
+{
+	double		zoom_level;
+	t_fractol	*fractol;
+	int32_t		mouse_x;
+	int32_t		mouse_y;
 
-
-// void	scroll_hook(double xdelta, double ydelta, void *param)
-// {
-// 	t_fractol	*fractol;
-
-// 	fractol = (t_fractol *)param;
-// 	(void)xdelta;
-// 	if (ydelta > 0)
-// 	{
-// 		fractol->xmin += 0.05;
-// 		fractol->xmax += -0.05;
-// 		fractol->ymin += 0.05;
-// 		fractol->ymax += -0.05;
-// 		fractol->zoom += +0.05;
-// 		printf("xmin = %f xmax = %f\n", fractol->xmin, fractol->xmax);
-// 		printf("ymin = %f ymax = %f\n", fractol->ymin, fractol->ymax);
-// 		printf("zoom value = %f\n", fractol->zoom);
-// 		_put_pixel(fractol);
-// 	}
-// 	else if (ydelta < 0)
-// 	{
-// 		fractol->xmin += -0.05;
-// 		fractol->xmax += 0.05;
-// 		fractol->ymin += -0.05;
-// 		fractol->ymax += 0.05;
-// 		fractol->zoom += -0.05;
-// 		_put_pixel(fractol);
-// 	}
-// }
+	(void)xdelta;
+	fractol = (t_fractol *)param;
+	zoom_level = 1.42;
+	mlx_get_mouse_pos(fractol->img.mlx, &mouse_x, &mouse_y);
+	if (ydelta < 0)
+		zoom(fractol, mouse_x, mouse_y, zoom_level);
+	else if (ydelta > 0)
+		zoom(fractol, mouse_x, mouse_y, 1/zoom_level);
+	_put_pixel(fractol);
+}
 
 void	_put_pixel(t_fractol *mb)
 {
