@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:23:46 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/19 16:11:54 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:29:39 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,44 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
+
+
+// int key_hook(int key_code, t_fractol *fractol)
+// {
+// 	double	x_range, y_range, pan_factor;
+
+// 	x_range = fractol->xmax - fractol->xmin;
+// 	y_range = fractol->ymax - fractol->ymin;
+// 	pan_factor = 0.05;  // Adjust this as per your needs
+
+// 	if (key_code == ESC)
+// 		exit(1);
+// 	else if (key_code == LEFT)
+// 	{
+// 		fractol->xmin -= x_range * pan_factor;
+// 		fractol->xmax -= x_range * pan_factor;
+// 	}
+// 	else if (key_code == RIGHT)
+// 	{
+// 		fractol->xmin += x_range * pan_factor;
+// 		fractol->xmax += x_range * pan_factor;
+// 	}
+// 	else if (key_code == UP)
+// 	{
+// 		fractol->ymin -= y_range * pan_factor;
+// 		fractol->ymax -= y_range * pan_factor;
+// 	}
+// 	else if (key_code == DOWN)
+// 	{
+// 		fractol->ymin += y_range * pan_factor;
+// 		fractol->ymax += y_range * pan_factor;
+// 	}
+// 	// ... other key conditions remain unchanged
+
+// 	_put_pixel(fractol);  // Or whatever your draw/redraw function is named
+// 	return (0);
+// }
+
 
 void	handle_key(mlx_key_data_t key, void *param)
 {
@@ -113,35 +151,65 @@ void	handle_key(mlx_key_data_t key, void *param)
 //    _put_pixel(fractol);
 //}
 
-
-void	scroll_hook(double xdelta, double ydelta, void *param)
+void scroll_hook(double xdelta, double ydelta, void *param)
 {
 	t_fractol	*fractol;
+	double		x_range, y_range, zoom_factor;
 
 	fractol = (t_fractol *)param;
 	(void)xdelta;
-	if (ydelta > 0)
+
+	x_range = fractol->xmax - fractol->xmin;
+	y_range = fractol->ymax - fractol->ymin;
+	zoom_factor = 0.1;  // Adjust this as per your needs
+
+	if (ydelta > 0)  // zooming in
 	{
-		fractol->xmin += 0.05;
-		fractol->xmax += -0.05;
-		fractol->ymin += 0.05;
-		fractol->ymax += -0.05;
-		fractol->zoom += +0.05;
-		printf("xmin = %f xmax = %f\n", fractol->xmin, fractol->xmax);
-		printf("ymin = %f ymax = %f\n", fractol->ymin, fractol->ymax);
-		printf("zoom value = %f\n", fractol->zoom);
-		_put_pixel(fractol);
+		fractol->xmin += x_range * zoom_factor;
+		fractol->xmax -= x_range * zoom_factor;
+		fractol->ymin += y_range * zoom_factor;
+		fractol->ymax -= y_range * zoom_factor;
 	}
-	else if (ydelta < 0)
+	else if (ydelta < 0)  // zooming out
 	{
-		fractol->xmin += -0.05;
-		fractol->xmax += 0.05;
-		fractol->ymin += -0.05;
-		fractol->ymax += 0.05;
-		fractol->zoom += -0.05;
-		_put_pixel(fractol);
+		fractol->xmin -= x_range * zoom_factor;
+		fractol->xmax += x_range * zoom_factor;
+		fractol->ymin -= y_range * zoom_factor;
+		fractol->ymax += y_range * zoom_factor;
 	}
+	_put_pixel(fractol);
 }
+
+
+
+// void	scroll_hook(double xdelta, double ydelta, void *param)
+// {
+// 	t_fractol	*fractol;
+
+// 	fractol = (t_fractol *)param;
+// 	(void)xdelta;
+// 	if (ydelta > 0)
+// 	{
+// 		fractol->xmin += 0.05;
+// 		fractol->xmax += -0.05;
+// 		fractol->ymin += 0.05;
+// 		fractol->ymax += -0.05;
+// 		fractol->zoom += +0.05;
+// 		printf("xmin = %f xmax = %f\n", fractol->xmin, fractol->xmax);
+// 		printf("ymin = %f ymax = %f\n", fractol->ymin, fractol->ymax);
+// 		printf("zoom value = %f\n", fractol->zoom);
+// 		_put_pixel(fractol);
+// 	}
+// 	else if (ydelta < 0)
+// 	{
+// 		fractol->xmin += -0.05;
+// 		fractol->xmax += 0.05;
+// 		fractol->ymin += -0.05;
+// 		fractol->ymax += 0.05;
+// 		fractol->zoom += -0.05;
+// 		_put_pixel(fractol);
+// 	}
+// }
 
 void	_put_pixel(t_fractol *mb)
 {
