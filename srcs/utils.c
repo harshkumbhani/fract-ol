@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:06:43 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/22 10:45:08 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:36:50 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	_count_digits_after_dot(char *str)
 	return (count);
 }
 
-double	_atod(char *str)
+double	atod(char *str)
 {
 	int		res;
 	int		sign;
@@ -56,4 +56,20 @@ void	clean_exit(t_fractol *fractol)
 	mlx_close_window(fractol->img.mlx);
 	mlx_terminate(fractol->img.mlx);
 	exit(EXIT_SUCCESS);
+}
+
+char	*to_lower(char *str)
+{
+	char	*ret_str;
+	int		i;
+
+	i = 0;
+	ret_str = str;
+	while (ret_str[i])
+	{
+		if (ret_str[i] >= 65 && ret_str[i] <= 90)
+			ret_str[i] = (ret_str[i] + 32);
+		i++;
+	}
+	return (str);
 }

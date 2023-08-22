@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/22 11:25:20 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:33:34 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,21 @@ typedef struct	s_fractol
 
 // Function declatrations for printing manuals
 void		manual_and_exit(void);
+double		atod(char *str);
+void		clean_exit(t_fractol *fractol);
+char		*to_lower(char *str);
 
-//Function definition for inits
 void		init(t_fractol *init, char *fractol_name);
 int			init_mlx(t_fractol *fractol, char *argv[]);
 
 // Function definition for colors 
 uint32_t	color_pix(int iterations, int max_iter);
 u_int32_t	function(int iter, double max_iter, uint32_t color);
-void		_put_pixel(t_fractol *fractol);
+
+void		draw_fractol(t_fractol *fractol);
+void		draw_mandelbrot(t_fractol *mb);
+void		draw_julia(t_fractol *jla, double c_re, double c_im);
+//Function definition for inits
 
 // Function declaration for hooks
 void		handle_mouse(double xdelta, double ydelta, void *param);
@@ -100,9 +106,10 @@ void		handle_key(mlx_key_data_t key, void *param);
 
 // Function defs for utils
 
-double		_atod(char *str);
-void		clean_exit(t_fractol *fractol);
 
+// Parse and check function
+
+// Fractals
 
 
 

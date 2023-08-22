@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:58:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/22 11:09:29 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:26:44 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	handle_mouse(double xdelta, double ydelta, void *param)
 		zoom(fractol, mouse_x, mouse_y, zoom_level);
 	else if (ydelta > 0)
 		zoom(fractol, mouse_x, mouse_y, 1/zoom_level);
-	_put_pixel(fractol);
+	draw_mandelbrot(fractol);
 }

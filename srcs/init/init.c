@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:33:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/22 11:15:10 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:04:33 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init(t_fractol *init, char *fractol_name)
 	init->xmax = 2;
 	init->ymin = -2;
 	init->ymax = 2;
-	init->x = 0;
+	init->x = -1;
 	init->y = 0;
 	init->zx = 0;
 	init->zy = 0;
