@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/19 14:43:00 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/22 11:25:20 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../srcs/myLib/header/library.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
+# include <execinfo.h>
+# include <signal.h>
 
 # ifndef WIDTH
 #  define WIDTH 1000
@@ -31,6 +33,11 @@
 # define X_MAX			2.0
 # define Y_MIN			-2.0
 # define Y_MAX			2.0
+
+# define LEFT			1
+# define RIGHT			2
+# define UP				3
+# define DOWN			4
 
 #define MAX_ITERATIONS 100
 
@@ -56,43 +63,47 @@ union u_color
 
 typedef struct	s_fractol
 {
-	t_img	img;
-	int		x;
-	int		y;
+	t_img		img;
+	int			x;
+	int			y;
 	double		xmax;
 	double		xmin;
 	double		ymax;
 	double		ymin;
-	double	c_re;
-	double	c_im;
-	double	zx;
-	double	zy;
-	double	tmp;
-	int		iter;
-	int		max_iter;
-	char	*name;
-	double	zoom;
+	double		c_re;
+	double		c_im;
+	double		zx;
+	double		zy;
+	double		tmp;
+	double		pan_factor;
+	int			iter;
+	int			max_iter;
+	char		*name;
+	double		zoom;
 }	t_fractol;
 
 // Function declatrations for printing manuals
-void			manual_and_exit(void);
+void		manual_and_exit(void);
 
 //Function definition for inits
-void			init(t_fractol *init);
-int				init_mlx(t_fractol *fractol);
+void		init(t_fractol *init, char *fractol_name);
+int			init_mlx(t_fractol *fractol, char *argv[]);
 
 // Function definition for colors 
-uint32_t		color_pix(int iterations, int max_iter);
-u_int32_t		function(int iter, double max_iter, uint32_t color);
-void	_put_pixel(t_fractol *fractol);
+uint32_t	color_pix(int iterations, int max_iter);
+u_int32_t	function(int iter, double max_iter, uint32_t color);
+void		_put_pixel(t_fractol *fractol);
 
 // Function declaration for hooks
-void			scroll_hook(double xdelta, double ydelta, void *param);
-void			handle_key(mlx_key_data_t key, void	*param);
+void		handle_mouse(double xdelta, double ydelta, void *param);
+void		handle_key(mlx_key_data_t key, void *param);
 
 // Function defs for utils
 
-double			_atod(char *str);
+double		_atod(char *str);
+void		clean_exit(t_fractol *fractol);
+
+
 
 
 #endif

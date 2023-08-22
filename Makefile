@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/21 16:06:11 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/22 11:08:18 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,16 +35,16 @@ endif
 
 OBJDIR		= ./objs
 
-VPATH		= .:./srcs/:./srcs/manual:./srcs/init:./srcs/colors:
-
-SRC			=
+VPATH		= .:./srcs/:./srcs/manual:./srcs/init:./srcs/colors:\
+				./srcs/hooks
+SRCS_HOOKS	= mouse_handle.c key_handle.c
 SRCS_MAN	= argument_manual.c
 SRCS_COLORS	= colors.c
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
 
-SRCS = fractol.c init.c utils.c $(SRCS_MAN) $(SRCS_COLORS)
+SRCS = fractol.c init.c utils.c $(SRCS_MAN) $(SRCS_COLORS) $(SRCS_HOOKS)
 OBJS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 DEPS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.d})
 
@@ -85,12 +85,6 @@ $(LIBFT_LIB):
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-#bonus: checker
-
-#checker: $(BONUS_OBJS) $(LIBFT_LIB)
-#	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
-#	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT_LIB) -o $@
 
 clean:
 	@echo

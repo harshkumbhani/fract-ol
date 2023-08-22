@@ -6,13 +6,11 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:06:43 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/18 15:23:20 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:45:08 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "fractol.h"
-#include "myLib/header/library.h"
-#include <math.h>
+#include "fractol.h"
 
 static int	_count_digits_after_dot(char *str)
 {
@@ -52,46 +50,10 @@ double	_atod(char *str)
 	return ((res * sign) / pow(10, _count_digits_after_dot(str)));
 }
 
-
-//int	main(void)
-//{
-//	char *str = "-9756.646";
-//	double	res;
-
-//	res = _atod(str);
-//	printf("Number : %f\n", res);
-//	return (0);
-//}
-
-//double	_atod(char *str)
-//{
-//	int			res;
-//	int			sign;
-//	double		fraction;
-
-//	fraction = 1.0;
-//	res = 0.0;
-//	sign = 1;
-//	while (ft_isspace(*str) == TRUE)
-//		str++;
-//	if (*str == '-' || *str == '+')
-//	{
-//		if (*str == '-')
-//			sign = -1;
-//		str++;
-//	}
-//	while (ft_isdigit(*str) == TRUE || (*str == '.' && fraction == 1.0))
-//	{
-//		if (*str == '.')
-//			fraction = 0.1;
-//		else if (fraction == 1.0)
-//			res = res * 10 + (*str - '0');
-//		else
-//		{
-//			res += (*str - '0') * fraction;
-//			fraction *= 0.1;
-//		}
-//		str++;
-//	}
-//	return ((res * sign));
-//}
+void	clean_exit(t_fractol *fractol)
+{
+	mlx_delete_image(fractol->img.mlx, fractol->img.img);
+	mlx_close_window(fractol->img.mlx);
+	mlx_terminate(fractol->img.mlx);
+	exit(EXIT_SUCCESS);
+}
