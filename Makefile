@@ -6,7 +6,7 @@
 #    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/25 15:58:11 by harsh            ###   ########.fr        #
+#    Updated: 2023/08/26 10:33:55 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,11 +89,11 @@ $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-#bonus: checker
-
-#checker: $(BONUS_OBJS) $(LIBFT_LIB)
-#	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
-#	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT_LIB) -o $@
+submodules:
+	@echo "$(COM_COLOR)Checking for MLX42 submodule...$(NO_COLOR)"
+	git clone https://github.com/codam-coding-college/MLX42.git
+	cd MLX42 && cmake -B build && make -C build -j4
+	
 
 clean:
 	@echo
