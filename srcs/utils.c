@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:06:43 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/25 16:04:47 by harsh            ###   ########.fr       */
+/*   Updated: 2023/08/26 12:24:47 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ double	atod(char *str)
 		i++;
 	}
 	return ((res * sign) / pow(10, _count_digits_after_dot(str)));
+}
+
+char	*str_to_lower(char *str)
+{
+	int	i = 0;
+
+	while (str[i] != '\0')
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] = str[i] + 32;
+		i++;
+	}
+	return (str);
 }
 
 void	clean_exit(t_fractol *fractol)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_fractol.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:53:18 by harsh             #+#    #+#             */
-/*   Updated: 2023/08/25 16:05:33 by harsh            ###   ########.fr       */
+/*   Updated: 2023/08/26 19:14:30 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,6 @@ void	select_fractol(t_fractol *fractol, t_fractal_type fractal_type)
 		draw_mandelbrot(fractol);
 	if (fractal_type == JULIA)
 		draw_julia(fractol);
+	if (fractal_type == FERN)
+		draw_fern(fractol);
 }

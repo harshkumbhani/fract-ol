@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:01:28 by harsh             #+#    #+#             */
-/*   Updated: 2023/08/25 15:55:40 by harsh            ###   ########.fr       */
+/*   Updated: 2023/08/26 18:47:20 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	handle_key(mlx_key_data_t key, void *param)
 	double		x_range;
 	double		y_range;
 
+	x_range = 0.0;
+	y_range = 0.0;
 	fractol = (t_fractol *)param;
 	if (key.key == MLX_KEY_LEFT || key.key == MLX_KEY_RIGHT)
 		x_range = (fractol->xmax - fractol->xmin) * fractol->pan_factor
@@ -37,8 +39,7 @@ void	handle_key(mlx_key_data_t key, void *param)
 	if (key.key == MLX_KEY_ESCAPE)
 		clean_exit(fractol);
 	if (key.key == 'R')
-		init(fractol);
-	// _put_pixel(fractol);
+		init(fractol, fractol->type);
 	select_fractol(fractol, fractol->type);
 }
 
@@ -78,6 +79,5 @@ void	handle_mouse(double xdelta, double ydelta, void *param)
 		zoom(fractol, mouse_x, mouse_y, zoom_level);
 	else if (ydelta > 0)
 		zoom(fractol, mouse_x, mouse_y, 1/zoom_level);
-	// _put_pixel(fractol);
 	select_fractol(fractol, fractol->type);
 }

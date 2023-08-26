@@ -3,21 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:33:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/23 12:19:40 by harsh            ###   ########.fr       */
+/*   Updated: 2023/08/26 19:01:41 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	init(t_fractol *init)
+static	void	init_fern(t_fractol *init)
 {
-	//t_fractol	*init;
+	init->c_im = 0;
+	init->c_re = 0;
+	init->xmin = -2.5;
+	init->xmax = 2.5;
+	init->ymin = 0;
+	init->ymax = 10;
+	init->x = -1;
+	init->y = 0;
+	init->zx = 0;
+	init->zy = 0;
+	init->max_iter = 10000000;
+	init->iter = 0;
+	init->tmp = 0;
+	init->zoom = 1.0;
+	init->pan_factor = 0.05;
+}
 
-	//init = fractol;
-	init->name = "Mandelbrot";
+static	void	init_rest(t_fractol *init)
+{
 	init->c_im = 0;
 	init->c_re = 0;
 	init->xmin = -2;
@@ -33,6 +48,14 @@ void	init(t_fractol *init)
 	init->tmp = 0;
 	init->zoom = 1.0;
 	init->pan_factor = 0.05;
+}
+
+void	init(t_fractol *init, t_fractal_type fractal_type)
+{
+	if (fractal_type == FERN)
+		init_fern(init);
+	else
+		init_rest(init);
 }
 
 int	init_mlx(t_fractol *fractol)

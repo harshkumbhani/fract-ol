@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:58:50 by harsh             #+#    #+#             */
-/*   Updated: 2023/08/25 17:42:54 by harsh            ###   ########.fr       */
+/*   Updated: 2023/08/26 19:16:01 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	draw_julia(t_fractol *jla)
 				jla->iter++;
 			}
 			mlx_put_pixel(jla->img.img, jla->x, jla->y,
-				color_forest(jla->iter, jla->max_iter));
+				color_julia(jla->iter, jla->max_iter));
 		}
 	}
 }

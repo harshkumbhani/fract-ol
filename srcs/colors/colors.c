@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:12:50 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/25 17:50:31 by harsh            ###   ########.fr       */
+/*   Updated: 2023/08/26 19:05:43 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ uint32_t	color_ice(int iterations, int max_iter)
 		return (function(iterations, max_iter, 0xFFFFFFFF)); // White
 }
 
-uint32_t	color_forest(int iterations, int max_iter)
+uint32_t	color_fern(int iterations, int max_iter)
 {
 	if (iterations == max_iter)
 		return (0xFFFFFFFF); // White
 	else if (iterations <= (double)max_iter * 0.2)
-		return (function(iterations, max_iter * 0.2, 0xFFFF00FF)); // Yellow
+		return (function(iterations, max_iter * 0.2, 0xFFFFFFFF)); // White
 	else if (iterations <= (double)max_iter * 0.6)
-		return (function(iterations, max_iter * 0.6, 0xFF008000)); // Green
+		return (function(iterations, max_iter * 0.6, 0xFFF2EE9D)); // Yellow
 	else
-		return (function(iterations, max_iter, 0xFFFFFFFF)); // White
+		return (function(iterations, max_iter, 0xFF7A9D54)); // Green
 }
 
 uint32_t	color_julia(int iterations, int max_iter)
