@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:06:43 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/22 14:36:50 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:04:47 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,4 @@ void	clean_exit(t_fractol *fractol)
 	mlx_close_window(fractol->img.mlx);
 	mlx_terminate(fractol->img.mlx);
 	exit(EXIT_SUCCESS);
-}
-
-char	*to_lower(char *str)
-{
-	char	*ret_str;
-	int		i;
-
-	i = 0;
-	ret_str = str;
-	while (ret_str[i])
-	{
-		if (ret_str[i] >= 65 && ret_str[i] <= 90)
-			ret_str[i] = (ret_str[i] + 32);
-		i++;
-	}
-	return (str);
 }

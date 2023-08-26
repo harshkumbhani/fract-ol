@@ -3,14 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:12:50 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/18 16:43:39 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:50:31 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+uint32_t	color_ice(int iterations, int max_iter)
+{
+	if (iterations == max_iter)
+		return (0xFFFFFFFF); // White
+	else if (iterations <= (double)max_iter * 0.2)
+		return (function(iterations, max_iter * 0.2, 0x0000FFFF)); // Blue
+	else if (iterations <= (double)max_iter * 0.6)
+		return (function(iterations, max_iter * 0.6, 0x00FFFFFF)); // Cyan
+	else
+		return (function(iterations, max_iter, 0xFFFFFFFF)); // White
+}
+
+uint32_t	color_forest(int iterations, int max_iter)
+{
+	if (iterations == max_iter)
+		return (0xFFFFFFFF); // White
+	else if (iterations <= (double)max_iter * 0.2)
+		return (function(iterations, max_iter * 0.2, 0xFFFF00FF)); // Yellow
+	else if (iterations <= (double)max_iter * 0.6)
+		return (function(iterations, max_iter * 0.6, 0xFF008000)); // Green
+	else
+		return (function(iterations, max_iter, 0xFFFFFFFF)); // White
+}
+
+uint32_t	color_julia(int iterations, int max_iter)
+{
+	if (iterations == max_iter)
+		return (0x000000FF); // Black for inside the set
+	else if (iterations <= (double)max_iter * 0.2)
+		return (function(iterations, max_iter * 0.2, 0x0000FFFF)); // Blue
+	else if (iterations <= (double)max_iter * 0.4)
+		return (function(iterations, max_iter * 0.4, 0x8A2BE2FF)); // BlueViolet
+	else if (iterations <= (double)max_iter * 0.6)
+		return (function(iterations, max_iter * 0.6, 0x00FFFFFF)); // Cyan
+	else if (iterations <= (double)max_iter * 0.8)
+		return (function(iterations, max_iter * 0.8, 0xFFFF00FF)); // Yellow
+	else
+		return (function(iterations, max_iter, 0xFF4500FF)); // OrangeRed
+}
 
 uint32_t	color_pix(int iterations, int max_iter)
 {
@@ -30,7 +70,7 @@ uint32_t	color_pix(int iterations, int max_iter)
 		return(function(iterations, max_iter, 0xE40303));
 }
 
-u_int32_t function(int iter, double max_iter, uint32_t color)
+uint32_t function(int iter, double max_iter, uint32_t color)
 {
 	uint32_t	start_color = 0x000000;
 	uint8_t		b;

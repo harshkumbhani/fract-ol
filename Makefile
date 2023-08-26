@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/22 15:16:13 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/25 15:58:11 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,17 +35,19 @@ endif
 
 OBJDIR		= ./objs
 
-VPATH		= .:./srcs/:./srcs/manual:./srcs/init:./srcs/colors:\
-				./srcs/hooks:./srcs/fractols/:
-SRCS_HOOKS	= mouse_handle.c key_handle.c
-SRCS_FRACT	= parse.c mandelbrot.c julia.c
+VPATH		= .:./srcs/:./srcs/manual:./srcs/init:./srcs/colors:./srcs/hooks:./srcs/fractols
+
+SRC			= fractol.c utils.c
 SRCS_MAN	= argument_manual.c
+SRCS_INIT	= init.c
 SRCS_COLORS	= colors.c
+SRCS_HOOKS	= hooks.c
+SRCS_FRACTOLS = mandelbrot.c julia.c select_fractol.c
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
 
-SRCS = fractol.c init.c utils.c $(SRCS_MAN) $(SRCS_COLORS) $(SRCS_HOOKS) $(SRCS_FRACT)
+SRCS = $(SRC) $(SRCS_MAN) $(SRCS_COLORS) $(SRCS_INIT) $(SRCS_HOOKS) $(SRCS_FRACTOLS)
 OBJS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 DEPS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.d})
 
@@ -86,6 +88,12 @@ $(LIBFT_LIB):
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+#bonus: checker
+
+#checker: $(BONUS_OBJS) $(LIBFT_LIB)
+#	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
+#	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT_LIB) -o $@
 
 clean:
 	@echo

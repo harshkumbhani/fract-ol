@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 14:15:52 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/22 15:21:22 by hkumbhan         ###   ########.fr       */
+/*   Created: 2023/08/25 13:51:19 by harsh             #+#    #+#             */
+/*   Updated: 2023/08/25 13:53:11 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	draw_mandelbrot(t_fractol *mb)
 {
-	//mb->x = 0;
-	mb->name = "Mandelbrot";
+	mb->x = 0;
 	while (++mb->x < WIDTH)
 	{
 		mb->y = -1;

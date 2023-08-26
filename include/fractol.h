@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/22 15:33:34 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:36:51 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include "../srcs/myLib/header/library.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
-# include <execinfo.h>
-# include <signal.h>
+# include <stdint.h>
 
 # ifndef WIDTH
 #  define WIDTH 1000
@@ -33,11 +32,6 @@
 # define X_MAX			2.0
 # define Y_MIN			-2.0
 # define Y_MAX			2.0
-
-# define LEFT			1
-# define RIGHT			2
-# define UP				3
-# define DOWN			4
 
 #define MAX_ITERATIONS 100
 
@@ -61,56 +55,63 @@ union u_color
 	t_color	c;
 };
 
+typedef enum e_fractal_type
+{
+	INVALID = -1,
+	MANDELBROT,
+	JULIA
+}	t_fractal_type;
+
 typedef struct	s_fractol
 {
-	t_img		img;
-	int			x;
-	int			y;
+	t_img	img;
+	int		x;
+	int		y;
 	double		xmax;
 	double		xmin;
 	double		ymax;
 	double		ymin;
-	double		c_re;
-	double		c_im;
-	double		zx;
-	double		zy;
-	double		tmp;
-	double		pan_factor;
-	int			iter;
-	int			max_iter;
-	char		*name;
-	double		zoom;
+	double	c_re;
+	double	c_im;
+	double	zx;
+	double	zy;
+	double	tmp;
+	double	pan_factor;
+	int		iter;
+	int		max_iter;
+	char	*name;
+	double	zoom;
+	t_fractal_type	type;
 }	t_fractol;
 
+
 // Function declatrations for printing manuals
-void		manual_and_exit(void);
-double		atod(char *str);
-void		clean_exit(t_fractol *fractol);
-char		*to_lower(char *str);
+void			manual_and_exit(void);
 
-void		init(t_fractol *init, char *fractol_name);
-int			init_mlx(t_fractol *fractol, char *argv[]);
-
-// Function definition for colors 
-uint32_t	color_pix(int iterations, int max_iter);
-u_int32_t	function(int iter, double max_iter, uint32_t color);
-
-void		draw_fractol(t_fractol *fractol);
-void		draw_mandelbrot(t_fractol *mb);
-void		draw_julia(t_fractol *jla, double c_re, double c_im);
 //Function definition for inits
+void			init(t_fractol *init);
+int				init_mlx(t_fractol *fractol);
+
+
+uint32_t		function(int iter, double max_iter, uint32_t color);
+uint32_t		color_pix(int iterations, int max_iter);
+uint32_t		color_ice(int iterations, int max_iter);
+uint32_t		color_forest(int iterations, int max_iter);
+uint32_t		color_julia(int iterations, int max_iter);
+// void			_put_pixel(t_fractol *fractol);
 
 // Function declaration for hooks
-void		handle_mouse(double xdelta, double ydelta, void *param);
-void		handle_key(mlx_key_data_t key, void *param);
+void			handle_mouse(double xdelta, double ydelta, void *param);
+void			handle_key(mlx_key_data_t key, void	*param);
 
 // Function defs for utils
 
+double			atod(char *str);
+void			clean_exit(t_fractol *fractol);
+// void			draw_fractol(t_fractol *fractol);
 
-// Parse and check function
-
-// Fractals
-
-
+void	draw_mandelbrot(t_fractol *mb);
+void	draw_julia(t_fractol *jla);
+void	select_fractol(t_fractol *fractol, t_fractal_type fractal_type);
 
 #endif

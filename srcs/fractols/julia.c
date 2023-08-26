@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 15:00:30 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/22 15:21:47 by hkumbhan         ###   ########.fr       */
+/*   Created: 2023/08/25 15:58:50 by harsh             #+#    #+#             */
+/*   Updated: 2023/08/25 17:42:54 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	draw_julia(t_fractol *jla, double c_re, double c_im)
+void	draw_julia(t_fractol *jla)
 {
-	jla->name = "Julia";
-	jla->c_re = c_re;
-	jla->c_im = c_im;
+	jla->x = -1;
 	while (++jla->x < WIDTH)
 	{
 		jla->y = -1;
@@ -35,7 +33,7 @@ void	draw_julia(t_fractol *jla, double c_re, double c_im)
 				jla->iter++;
 			}
 			mlx_put_pixel(jla->img.img, jla->x, jla->y,
-				color_pix(jla->iter, jla->max_iter));
+				color_forest(jla->iter, jla->max_iter));
 		}
 	}
 }
