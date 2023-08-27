@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 11:57:03 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/26 18:55:19 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/27 16:09:48 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	draw_fern(t_fractol *fern)
 			/ (fern->ymax - fern->ymin) * HEIGHT;
 		if (fern->x >= 0 && fern->x < WIDTH && fern->y >= 0 && fern->y < HEIGHT)
 			mlx_put_pixel(fern->img.img, fern->x, fern->y,
-				color_fern(n, fern->max_iter));
+				fern->color_fun(n, fern->max_iter));
 		n++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/27 15:33:24 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/27 16:10:13 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ uint32_t	color_mandelbrot(int iterations, int max_iter);
 uint32_t	color_fall(int iterations, int max_iter);
 uint32_t	color_fern(int iterations, int max_iter);
 uint32_t	color_julia(int iterations, int max_iter);
+uint32_t	color_space(int iterations, int max_iter);
 
 // Function declaration for hooks
 void		handle_mouse(double xdelta, double ydelta, void *param);

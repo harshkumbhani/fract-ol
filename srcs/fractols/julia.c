@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 15:58:50 by harsh             #+#    #+#             */
-/*   Updated: 2023/08/27 14:51:58 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/27 16:09:38 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	draw_julia(t_fractol *jla)
 				jla->iter++;
 			}
 			mlx_put_pixel(jla->img.img, jla->x, jla->y,
-				color_mandelbrot(jla->iter, jla->max_iter));
+				jla->color_fun(jla->iter, jla->max_iter));
 		}
 	}
 }

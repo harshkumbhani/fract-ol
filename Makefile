@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/26 11:57:16 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/27 16:03:39 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ VPATH		= .:./srcs/:./srcs/manual:./srcs/init:./srcs/colors:./srcs/hooks:./srcs/f
 SRC			= fractol.c utils.c
 SRCS_MAN	= argument_manual.c
 SRCS_INIT	= init.c
-SRCS_COLORS	= colors.c
+SRCS_COLORS	= colors.c color_pallette.c
 SRCS_HOOKS	= hooks.c
 SRCS_FRACTOLS = mandelbrot.c julia.c fern.c select_fractol.c
 ################################################################################
