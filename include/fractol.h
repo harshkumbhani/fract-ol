@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/27 14:50:05 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/27 15:33:24 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_fractol
 	char			*name;
 	double			zoom;
 	t_fractal_type	type;
+	uint32_t		(*color_fun)(int iterations, int max_iter);
 }	t_fractol;
 
 // Function declatrations for printing manuals
@@ -81,6 +82,7 @@ uint32_t	color_julia(int iterations, int max_iter);
 // Function declaration for hooks
 void		handle_mouse(double xdelta, double ydelta, void *param);
 void		handle_key(mlx_key_data_t key, void	*param);
+void		handle_color(mlx_key_data_t key, t_fractol *fractol);
 
 // Function defs for utils
 

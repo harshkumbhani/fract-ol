@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:01:28 by harsh             #+#    #+#             */
-/*   Updated: 2023/08/27 12:14:27 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/27 15:55:41 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,29 @@ void	handle_key(mlx_key_data_t key, void *param)
 		clean_exit(fractol);
 	if (key.key == 'R')
 		init(fractol, fractol->type);
+	handle_color(key, fractol);
 	select_fractol(fractol, fractol->type);
+}
+
+void	handle_color(mlx_key_data_t key, t_fractol *fractol)
+{
+	static int	count = 0;
+
+	if (key.key == MLX_KEY_C && key.action == MLX_PRESS)
+	{
+		count++;
+		if (count % 4 == 1)
+			fractol->color_fun = &color_fall;
+		else if (count % 4 == 2)
+			fractol->color_fun = &color_mandelbrot;
+		else if (count % 4 == 3)
+			fractol->color_fun = &color_julia;
+		else
+		{
+			fractol->color_fun = &color_fern;
+			count = 0;
+		}
+	}
 }
 
 static void	zoom(t_fractol *fractol, int x, int y, double zoom_factor)
