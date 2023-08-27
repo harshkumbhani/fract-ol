@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:51:19 by harsh             #+#    #+#             */
-/*   Updated: 2023/08/26 18:52:26 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:50:17 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_mandelbrot(t_fractol *mb)
 				mb->iter++;
 			}
 			mlx_put_pixel(mb->img.img, mb->x, mb->y,
-				color_ice(mb->iter, mb->max_iter));
+				color_fall(mb->iter, mb->max_iter));
 		}
 	}
 }

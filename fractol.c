@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:23:46 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/26 19:09:41 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/27 12:00:49 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	main(int argc, char *argv[])
 		return (1);
 	mlx_key_hook(fractol.img.mlx, &handle_key, &fractol);
 	mlx_scroll_hook(fractol.img.mlx, &handle_mouse, &fractol);
-	mlx_image_to_window(fractol.img.mlx, fractol.img.img, fractol.x, fractol.y);
+	mlx_image_to_window(fractol.img.mlx, fractol.img.img,
+		fractol.x, fractol.y);
 	select_fractol(&fractol, fractal_type);
 	mlx_loop(fractol.img.mlx);
 	clean_exit(&fractol);

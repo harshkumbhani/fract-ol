@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:33:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/26 19:01:41 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:39:29 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ static	void	init_fern(t_fractol *init)
 	init->iter = 0;
 	init->tmp = 0;
 	init->zoom = 1.0;
-	init->pan_factor = 0.05;
+	init->pan_factor = 0.01;
 }
 
-static	void	init_rest(t_fractol *init)
+static	void	init_rest(t_fractol *init, int fractal_type)
 {
-	init->c_im = 0;
-	init->c_re = 0;
+	if (fractal_type == MANDELBROT)
+	{
+		init->c_im = 0;
+		init->c_re = 0;
+	}
 	init->xmin = -2;
 	init->xmax = 2;
 	init->ymin = -2;
@@ -55,7 +58,7 @@ void	init(t_fractol *init, t_fractal_type fractal_type)
 	if (fractal_type == FERN)
 		init_fern(init);
 	else
-		init_rest(init);
+		init_rest(init, fractal_type);
 }
 
 int	init_mlx(t_fractol *fractol)
