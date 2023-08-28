@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/28 17:12:30 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/28 17:52:07 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ NAME 		= fractol
 CC			= cc
 CFLAGS 		= -Wall -Wextra -Werror -MMD -MP -I./include -I./srcs/myLib/header -g
 MLX_LIB		= ./MLX42/build/libmlx42.a
+MLX_PATH	= ./MLX42
 LIBFT_DIR 	= ./srcs/myLib
 LIBFT_LIB 	= ./srcs/myLib/libft.a
 
@@ -68,7 +69,7 @@ COM_STRING   = "Compiling"
 #                                 Makefile rules                             #
 ################################################################################
 
-all: $(NAME)
+all: submodules $(NAME)
 	@echo
 	@echo "$(OBJ_COLOR)$(OS)$(NO_COLOR):  $(MLX)"
 
@@ -91,8 +92,11 @@ $(OBJDIR)/%.o: %.c
 
 submodules:
 	@echo "$(COM_COLOR)Checking for MLX42 submodule...$(NO_COLOR)"
-	git clone https://github.com/codam-coding-college/MLX42.git
-	cd MLX42 && cmake -B build && make -C build -j4
+	@if [ -z "$(shell ls -A $(MLX_PATH))" ]; then \
+		git submodule init $(MLX_PATH); \
+		git submodule update $(MLX_PATH); \
+		cd MLX42 && cmake -B build && make -C build -j4; \
+	fi
 
 clean:
 	@echo
