@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/27 16:10:13 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:16:43 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@
 
 # define MAX_ITERATIONS 100
 
-typedef struct s_img
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-}	t_img;
-
 typedef enum e_fractal_type
 {
 	INVALID = -1,
@@ -42,6 +36,14 @@ typedef enum e_fractal_type
 	JULIA,
 	FERN
 }	t_fractal_type;
+
+typedef struct s_img
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+}	t_img;
+
+typedef uint32_t	(*t_color_fun)(int iter, int max_iter);
 
 typedef struct s_fractol
 {
@@ -62,38 +64,49 @@ typedef struct s_fractol
 	int				max_iter;
 	char			*name;
 	double			zoom;
+	mlx_image_t		*help_img;
+	t_color_fun		color_fun;
 	t_fractal_type	type;
-	uint32_t		(*color_fun)(int iterations, int max_iter);
 }	t_fractol;
 
 // Function declatrations for printing manuals
-void		manual_and_exit(void);
+void			manual_and_exit(void);
 
 //Function definition for inits
-void		init(t_fractol *init, t_fractal_type fractal_type);
-int			init_mlx(t_fractol *fractol);
+void			init(t_fractol *init, t_fractal_type fractal_type);
+int				init_mlx(t_fractol *fractol);
+void			init_help_manual(t_fractol *fractol);
 
-uint32_t	function(int iter, double max_iter, uint32_t color);
-uint32_t	color_mandelbrot(int iterations, int max_iter);
-uint32_t	color_fall(int iterations, int max_iter);
-uint32_t	color_fern(int iterations, int max_iter);
-uint32_t	color_julia(int iterations, int max_iter);
-uint32_t	color_space(int iterations, int max_iter);
+// Function definitions for Fractals
+void			draw_mandelbrot(t_fractol *mb);
+void			draw_julia(t_fractol *jla);
+void			draw_fern(t_fractol *fern);
+void			select_fractol(t_fractol *fractol, t_fractal_type fractal_type);
+t_fractal_type	get_fractal_type(t_fractol *fractol, int argc, char *str[]);
+
+// Function definitions for colors
+
+// Color Pallette
+uint32_t		color_mandelbrot(int iterations, int max_iter);
+uint32_t		color_fern(int iterations, int max_iter);
+uint32_t		color_julia(int iterations, int max_iter);
+uint32_t		color_fall(int iterations, int max_iter);
+uint32_t		color_space(int iterations, int max_iter);
+uint32_t		color_milkyway(int iterations, int max_iter);
+uint32_t		color_neon(int iterations, int max_iter);
+uint32_t		color_flamingo(int iterations, int max_iter);
+
+// Function make color gradient
+uint32_t		function(int iter, double max_iter, uint32_t color);
 
 // Function declaration for hooks
-void		handle_mouse(double xdelta, double ydelta, void *param);
-void		handle_key(mlx_key_data_t key, void	*param);
-void		handle_color(mlx_key_data_t key, t_fractol *fractol);
+void			handle_mouse(double xdelta, double ydelta, void *param);
+void			handle_key(mlx_key_data_t key, void	*param);
 
 // Function defs for utils
-
-double		atod(char *str);
-void		clean_exit(t_fractol *fractol);
-char		*str_to_lower(char *str);
-
-void		draw_mandelbrot(t_fractol *mb);
-void		draw_julia(t_fractol *jla);
-void		draw_fern(t_fractol *fern);
-void		select_fractol(t_fractol *fractol, t_fractal_type fractal_type);
+double			atod(char *str);
+char			*str_to_lower(char *str);
+void			clean_exit(t_fractol *fractol);
+int				check_argv(char *argv[]);
 
 #endif

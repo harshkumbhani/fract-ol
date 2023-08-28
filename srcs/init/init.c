@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:33:12 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/27 11:39:29 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:38:02 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,21 @@ void	init(t_fractol *init, t_fractal_type fractal_type)
 		init_rest(init, fractal_type);
 }
 
+void	init_help_manual(t_fractol *fractol)
+{
+	mlx_texture_t	*texture;
+
+	texture = mlx_load_png("srcs/hooks/help_manual.png");
+	fractol->help_img = mlx_texture_to_image(fractol->img.mlx, texture);
+	mlx_image_to_window(fractol->img.mlx, fractol->help_img, 0, 0);
+	mlx_resize_image(fractol->help_img, WIDTH, HEIGHT);
+	fractol->help_img->enabled = false;
+	mlx_delete_texture(texture);
+}
+
 int	init_mlx(t_fractol *fractol)
 {
-	fractol->img.mlx = mlx_init(WIDTH, HEIGHT, fractol->name, 1);
+	fractol->img.mlx = mlx_init(WIDTH, HEIGHT, fractol->name, true);
 	if (!(fractol->img.mlx))
 		return (perror("Error in mlx init"), 1);
 	fractol->img.img = mlx_new_image(fractol->img.mlx, WIDTH, HEIGHT);

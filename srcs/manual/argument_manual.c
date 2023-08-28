@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:45:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/17 17:14:49 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:38:14 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	manual_and_exit(void)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		ft_printf("%s", line);
 		free(line);
 	}

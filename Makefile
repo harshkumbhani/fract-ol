@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/27 16:03:39 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/28 17:12:30 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC			= fractol.c utils.c
 SRCS_MAN	= argument_manual.c
 SRCS_INIT	= init.c
 SRCS_COLORS	= colors.c color_pallette.c
-SRCS_HOOKS	= hooks.c
+SRCS_HOOKS	= key_hooks.c mouse_hooks.c
 SRCS_FRACTOLS = mandelbrot.c julia.c fern.c select_fractol.c
 ################################################################################
 #                                  Makefile  objs                              #
@@ -93,7 +93,6 @@ submodules:
 	@echo "$(COM_COLOR)Checking for MLX42 submodule...$(NO_COLOR)"
 	git clone https://github.com/codam-coding-college/MLX42.git
 	cd MLX42 && cmake -B build && make -C build -j4
-	
 
 clean:
 	@echo
