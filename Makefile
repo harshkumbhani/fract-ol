@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/29 10:59:39 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/29 11:20:26 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ $(OBJDIR)/%.o: %.c
 
 $(MLX_PATH):
 	@echo "$(COM_COLOR)Checking for MLX42 submodule...$(NO_COLOR)"
-	@git submodule update --init --recursive
+	@git submodule add https://github.com/codam-coding-college/MLX42.git
 
 clean:
 	@echo
