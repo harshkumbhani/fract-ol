@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/28 17:52:07 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/29 09:02:39 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ SRCS_FRACTOLS = mandelbrot.c julia.c fern.c select_fractol.c
 
 SRCS = $(SRC) $(SRCS_MAN) $(SRCS_COLORS) $(SRCS_INIT) $(SRCS_HOOKS) $(SRCS_FRACTOLS)
 OBJS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
-DEPS = $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.d})
 
 ################################################################################
 #                                 Makefile logic                               #
@@ -69,28 +68,18 @@ COM_STRING   = "Compiling"
 #                                 Makefile rules                             #
 ################################################################################
 
-all: submodules $(NAME)
-	@echo
-	@echo "$(OBJ_COLOR)$(OS)$(NO_COLOR):  $(MLX)"
+all: $(MLX_PATH) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_LIB)
+$(NAME): $(OBJS)
+	@make -C $(LIBFT_DIR)
 	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(MLX_LIB) $(MLX) $(LIBFT_LIB)
-
-$(LIBFT_LIB):
-	@make re -C $(LIBFT_DIR) > make_output.txt 2>&1; \
-	if [ $$? -eq 0 ]; then \
-		echo "$(OK_COLOR)LIBFT.A compilation successful.$(NO_COLOR)"; \
-	else \
-		echo "$(ERROR_COLOR)LIBFT.A compilation failed.$(NO_COLOR) Check make_output.txt for details."; \
-		exit 1; \
-	fi
+	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX) $(LIBFT_LIB) -o $@
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-submodules:
+$(MLX_PATH):
 	@echo "$(COM_COLOR)Checking for MLX42 submodule...$(NO_COLOR)"
 	@if [ -z "$(shell ls -A $(MLX_PATH))" ]; then \
 		git submodule init $(MLX_PATH); \
@@ -102,7 +91,7 @@ clean:
 	@echo
 	@printf "%b" "$(COM_COLOR)Cleaning objects and dependency files...$(NO_COLOR)"
 	@make clean -C $(LIBFT_DIR)
-	@rm -rf objs program
+	@rm -rf objs fractol
 	@echo
 
 fclean: clean
@@ -117,5 +106,3 @@ norm: $(SRCS)
 re: fclean all
 
 .PHONY: all clean fclean re $(LIBFT_LIB)
-
--include $(DEPS)
