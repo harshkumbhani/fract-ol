@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/29 10:43:40 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/29 10:59:39 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ fclean: clean
 	@printf "%b" "$(COM_COLOR)Cleaning libft library...$(NO_COLOR)"
 	@make fclean -C $(LIBFT_DIR)
 	@rm -f $(NAME)
+	@rm -rf $(MLX_PATH)
 	@echo
 
 norm: $(SRCS)
