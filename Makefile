@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/29 09:02:39 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/08/29 10:43:40 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,8 +70,9 @@ COM_STRING   = "Compiling"
 
 all: $(MLX_PATH) $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(MLX_PATH)
 	@make -C $(LIBFT_DIR)
+	@cd MLX42 && cmake -B build && make -C build -j4
 	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX) $(LIBFT_LIB) -o $@
 
@@ -81,11 +82,7 @@ $(OBJDIR)/%.o: %.c
 
 $(MLX_PATH):
 	@echo "$(COM_COLOR)Checking for MLX42 submodule...$(NO_COLOR)"
-	@if [ -z "$(shell ls -A $(MLX_PATH))" ]; then \
-		git submodule init $(MLX_PATH); \
-		git submodule update $(MLX_PATH); \
-		cd MLX42 && cmake -B build && make -C build -j4; \
-	fi
+	@git submodule update --init --recursive
 
 clean:
 	@echo
