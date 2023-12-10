@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:21:56 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/28 17:38:36 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/12/10 09:28:54 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ static void	adjust_view(t_fractol *fractol, double x_range, double y_range)
 	fractol->ymax += y_range;
 }
 
-static void	reset_colors(t_fractol *fractol, int *count)
+static void	reset_colors(t_fractol *fractol)
 {
-	count = 0;
 	if (fractol->type == MANDELBROT)
 		fractol->color_fun = &color_mandelbrot;
 	else if (fractol->type == JULIA)
@@ -49,7 +48,7 @@ static void	handle_color(mlx_key_data_t key, t_fractol *fractol)
 		else if (count % 6 == 5)
 			fractol->color_fun = &color_flamingo;
 		else
-			reset_colors(fractol, &count);
+			reset_colors(fractol);
 	}
 }
 

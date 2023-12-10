@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/08/29 11:20:26 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/12/10 09:31:55 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,10 +70,10 @@ COM_STRING   = "Compiling"
 
 all: $(MLX_PATH) $(NAME)
 
-$(NAME): $(OBJS) $(MLX_PATH)
+$(NAME): $(MLX_PATH) $(OBJS)
 	@make -C $(LIBFT_DIR)
 	@cd MLX42 && cmake -B build && make -C build -j4
-	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR)$(OBJS) $(NO_COLOR)"
+	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR) $(NO_COLOR)"
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) $(MLX) $(LIBFT_LIB) -o $@
 
 $(OBJDIR)/%.o: %.c
@@ -83,6 +83,7 @@ $(OBJDIR)/%.o: %.c
 $(MLX_PATH):
 	@echo "$(COM_COLOR)Checking for MLX42 submodule...$(NO_COLOR)"
 	@git submodule add https://github.com/codam-coding-college/MLX42.git
+	@git submodule init && git submodule update
 
 clean:
 	@echo
@@ -95,7 +96,6 @@ fclean: clean
 	@printf "%b" "$(COM_COLOR)Cleaning libft library...$(NO_COLOR)"
 	@make fclean -C $(LIBFT_DIR)
 	@rm -f $(NAME)
-	@rm -rf $(MLX_PATH)
 	@echo
 
 norm: $(SRCS)
