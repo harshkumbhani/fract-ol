@@ -6,7 +6,7 @@
 #    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/12/10 09:31:55 by harsh            ###   ########.fr        #
+#    Updated: 2023/12/10 09:43:51 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,9 +68,9 @@ COM_STRING   = "Compiling"
 #                                 Makefile rules                             #
 ################################################################################
 
-all: $(MLX_PATH) $(NAME)
+all: submodule $(NAME)
 
-$(NAME): $(MLX_PATH) $(OBJS)
+$(NAME): $(OBJS)
 	@make -C $(LIBFT_DIR)
 	@cd MLX42 && cmake -B build && make -C build -j4
 	@echo "$(COM_COLOR)$(COM_STRING) $@ $(OBJ_COLOR) $(NO_COLOR)"
@@ -80,10 +80,10 @@ $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(MLX_PATH):
+submodule:
 	@echo "$(COM_COLOR)Checking for MLX42 submodule...$(NO_COLOR)"
-	@git submodule add https://github.com/codam-coding-college/MLX42.git
 	@git submodule init && git submodule update
+#	@git submodule add https://github.com/codam-coding-college/MLX42.git
 
 clean:
 	@echo
