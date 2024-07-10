@@ -7,13 +7,15 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y cmake libglfw3-dev libglfw3
+
+    - name: Build project
       run: make
 
     - name: Run executable
@@ -21,3 +23,4 @@ jobs:
 
     - name: Clean libraries
       run: make fclean
+
