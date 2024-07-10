@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/10 11:27:05 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/10 14:24:45 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FRACTOL_H
 
 # include "ft_lib.h"
-# include "MLX42.h"
+# include <MLX42/MLX42.h>
 # include <math.h>
 # include <stdint.h>
 # include <time.h>
