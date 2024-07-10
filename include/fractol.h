@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/10 18:07:36 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/10 19:08:04 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,36 @@ typedef struct s_img
 
 typedef uint32_t	(*t_color_fun)(int iter, int max_iter);
 
+typedef struct s_gradient_state
+{
+	uint8_t	gradient_value;
+	bool	gradient_direction;
+}	t_gradient_state;
+
 typedef struct s_fractol
 {
-	t_img			img;
-	int				x;
-	int				y;
-	double			xmax;
-	double			xmin;
-	double			ymax;
-	double			ymin;
-	double			c_re;
-	double			c_im;
-	double			zx;
-	double			zy;
-	double			tmp;
-	double			pan_factor;
-	int				iter;
-	int				max_iter;
-	char			*name;
-	double			zoom;
-	mlx_image_t		*help_img;
-	t_color_fun		color_fun;
-	t_fractal_type	type;
+	t_img				img;
+	int					x;
+	int					y;
+	double				xmax;
+	double				xmin;
+	double				ymax;
+	double				ymin;
+	double				c_re;
+	double				c_im;
+	double				zx;
+	double				zy;
+	double				tmp;
+	double				pan_factor;
+	int					iter;
+	int					max_iter;
+	char				*name;
+	double				zoom;
+	mlx_image_t			*help_img;
+	t_color_fun			color_fun;
+	t_fractal_type		type;
+	t_gradient_state	gradient_state;
 }	t_fractol;
-
 
 // Function declatrations for printing manuals
 void			manual_and_exit(void);
@@ -112,6 +118,5 @@ double			atod(char *str);
 char			*str_to_lower(char *str);
 void			clean_exit(t_fractol *fractol);
 int				check_argv(char *argv[]);
-
 
 #endif
