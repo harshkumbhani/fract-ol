@@ -6,7 +6,7 @@
 #    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2024/07/10 11:33:47 by harsh            ###   ########.fr        #
+#    Updated: 2024/07/10 14:52:15 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ MLX_LIB	:= ./MLX42/build/libmlx42.a
 ifeq ($(shell uname), Darwin)
 	MLX_FLAGS = -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
 else ifeq ($(shell uname), Linux)
-	MLX_FLAGS = -ldl -lglfw -pthread -lm
+	MLX_FLAGS = -L./MLX42/build -lglfw -ldl -pthread -lm
 endif
 
 ################################################################################
@@ -42,7 +42,7 @@ LOG := printf "[$(BO)$(G)ⓘ INFO$(X)] %s\n"
 ################################################################################
 
 OBJ_DIR		:= _obj
-INC_DIRS 	:= ./include ./libft/include ./MLX42/include/MLX42
+INC_DIRS 	:= ./include ./libft/include ./MLX42/include
 SRC_DIRS 	:= ./srcs/ ./srcs/manual ./srcs/init ./srcs/colors \
 				./srcs/hooks ./srcs/fractols ./srcs/utils
 
@@ -75,7 +75,7 @@ all: submodule mlx_lib ft_lib $(NAME)
 
 $(NAME): $(OBJS)
 	@$(LOG) "Linking object files to $@"
-	@$(CC) $(CFLAGS) $^ $(MLX_LIB) $(MLX_FLAGS) $(LIBFT_LIB) -o $@
+	$(CC) $(CFLAGS) $^ $(LIBFT_LIB) $(MLX_LIB) $(MLX_FLAGS) -o $@
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(LOG) "Compiling $(notdir $@)"
@@ -119,6 +119,8 @@ fclean: clean
 	else \
 		$(LOG) "No library to clean."; \
 	fi
+	@$(LOG) "fcleaning libft directory"
+	@make fclean -C $(LIBFT_DIR)
 
 re: fclean all
 
