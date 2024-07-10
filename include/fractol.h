@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/28 17:16:43 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:27:05 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "../srcs/myLib/header/library.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "ft_lib.h"
+# include "MLX42.h"
 # include <math.h>
 # include <stdint.h>
 # include <time.h>
