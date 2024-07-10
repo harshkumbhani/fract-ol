@@ -6,7 +6,7 @@
 #    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2024/07/10 14:52:15 by harsh            ###   ########.fr        #
+#    Updated: 2024/07/10 15:09:19 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,8 @@ fclean: clean
 	fi
 	@$(LOG) "fcleaning libft directory"
 	@make fclean -C $(LIBFT_DIR)
+	@$(LOG) "Removing libmlx42.a library"
+	@rm -rf ./MLX42/build
 
 re: fclean all
 

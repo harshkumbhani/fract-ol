@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:23:46 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/08/28 17:16:12 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:07:58 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 //	system("leaks fractol");
 //}
 //atexit(check_leaks);
+
+void	loop_fractol(void *param)
+{
+	t_fractol	*fractol;
+
+	fractol = (t_fractol *)param;
+	check_translation(fractol);
+	handle_color(fractol);
+	select_fractol(fractol, fractol->type);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -39,6 +49,7 @@ int	main(int argc, char *argv[])
 		fractol.x, fractol.y);
 	init_help_manual(&fractol);
 	select_fractol(&fractol, fractal_type);
+	mlx_loop_hook(fractol.img.mlx, &loop_fractol, &fractol);
 	mlx_loop(fractol.img.mlx);
 	clean_exit(&fractol);
 	return (EXIT_SUCCESS);

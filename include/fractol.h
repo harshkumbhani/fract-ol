@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/10 14:24:45 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/10 18:07:36 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_fractol
 	t_fractal_type	type;
 }	t_fractol;
 
+
 // Function declatrations for printing manuals
 void			manual_and_exit(void);
 
@@ -102,11 +103,15 @@ uint32_t		function(int iter, double max_iter, uint32_t color);
 // Function declaration for hooks
 void			handle_mouse(double xdelta, double ydelta, void *param);
 void			handle_key(mlx_key_data_t key, void	*param);
+void			loop_fractol(void *param);
+void			check_translation(t_fractol *fractol);
+void			handle_color(t_fractol *fractol);
 
 // Function defs for utils
 double			atod(char *str);
 char			*str_to_lower(char *str);
 void			clean_exit(t_fractol *fractol);
 int				check_argv(char *argv[]);
+
 
 #endif

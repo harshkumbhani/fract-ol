@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:21:56 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/12/10 09:28:54 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/10 18:09:04 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	reset_colors(t_fractol *fractol)
 		fractol->color_fun = &color_fern;
 }
 
-static void	handle_color(mlx_key_data_t key, t_fractol *fractol)
+void	handle_color(t_fractol *fractol)
 {
 	static int	count = 0;
 
-	if (key.key == MLX_KEY_C && key.action == MLX_PRESS)
+	if(mlx_is_key_down(fractol->img.mlx, MLX_KEY_C))
 	{
 		count++;
 		if (count % 6 == 1)
@@ -52,23 +52,23 @@ static void	handle_color(mlx_key_data_t key, t_fractol *fractol)
 	}
 }
 
-void	check_translation(mlx_key_data_t key, t_fractol *fractol)
+void	check_translation(t_fractol *fractol)
 {
 	double		x_range;
 	double		y_range;
 
 	x_range = 0.0;
 	y_range = 0.0;
-	if (key.key == MLX_KEY_LEFT || key.key == MLX_KEY_RIGHT
-		|| key.key == 'A' || key.key == 'D')
+	if (mlx_is_key_down(fractol->img.mlx, MLX_KEY_LEFT)
+		|| mlx_is_key_down(fractol->img.mlx, MLX_KEY_RIGHT))
 		x_range = (fractol->xmax - fractol->xmin) * fractol->pan_factor
-			* ((key.key == MLX_KEY_LEFT || key.key == 'A')
-				- (key.key == MLX_KEY_RIGHT || key.key == 'D'));
-	if (key.key == MLX_KEY_UP || key.key == MLX_KEY_DOWN
-		|| key.key == 'W' || key.key == 'S')
+			* (mlx_is_key_down(fractol->img.mlx, MLX_KEY_LEFT)
+				- mlx_is_key_down(fractol->img.mlx, MLX_KEY_RIGHT));
+	if (mlx_is_key_down(fractol->img.mlx, MLX_KEY_UP)
+		|| mlx_is_key_down(fractol->img.mlx, MLX_KEY_DOWN))
 		y_range = (fractol->ymax - fractol->ymin) * fractol->pan_factor
-			* ((key.key == MLX_KEY_UP || key.key == 'W')
-				- (key.key == MLX_KEY_DOWN || key.key == 'S'));
+			* (mlx_is_key_down(fractol->img.mlx, MLX_KEY_DOWN)
+				- mlx_is_key_down(fractol->img.mlx, MLX_KEY_UP));
 	adjust_view(fractol, x_range, y_range);
 }
 
@@ -85,7 +85,4 @@ void	handle_key(mlx_key_data_t key, void *param)
 		return ;
 	if (key.key == 'R')
 		init(fractol, fractol->type);
-	check_translation(key, fractol);
-	handle_color(key, fractol);
-	select_fractol(fractol, fractol->type);
 }
