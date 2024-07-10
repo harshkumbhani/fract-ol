@@ -19,7 +19,7 @@ jobs:
       run: make
 
     - name: Run executable
-      run: ./fractol Mandelbrot
+      run: ./fractol
 
     - name: Clean libraries
       run: make fclean
