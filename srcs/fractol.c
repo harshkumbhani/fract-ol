@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:23:46 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/10 18:07:58 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/10 19:10:29 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ void	loop_fractol(void *param)
 	select_fractol(fractol, fractol->type);
 }
 
+void	setup_and_launch_fractal(t_fractol *fractol,
+			t_fractal_type fractol_type)
+{
+	mlx_key_hook(fractol->img.mlx, &handle_key, fractol);
+	mlx_scroll_hook(fractol->img.mlx, &handle_mouse, fractol);
+	mlx_image_to_window(fractol->img.mlx, fractol->img.img,
+		fractol->x, fractol->y);
+	init_help_manual(fractol);
+	select_fractol(fractol, fractol_type);
+	mlx_loop_hook(fractol->img.mlx, &loop_fractol, fractol);
+	mlx_loop(fractol->img.mlx);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_fractol		fractol;
@@ -43,14 +56,7 @@ int	main(int argc, char *argv[])
 	init(&fractol, fractal_type);
 	if (init_mlx(&fractol) == 1)
 		return (1);
-	mlx_key_hook(fractol.img.mlx, &handle_key, &fractol);
-	mlx_scroll_hook(fractol.img.mlx, &handle_mouse, &fractol);
-	mlx_image_to_window(fractol.img.mlx, fractol.img.img,
-		fractol.x, fractol.y);
-	init_help_manual(&fractol);
-	select_fractol(&fractol, fractal_type);
-	mlx_loop_hook(fractol.img.mlx, &loop_fractol, &fractol);
-	mlx_loop(fractol.img.mlx);
+	setup_and_launch_fractal(&fractol, fractal_type);
 	clean_exit(&fractol);
 	return (EXIT_SUCCESS);
 }

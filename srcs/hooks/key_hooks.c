@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:21:56 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/10 18:09:04 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/12 23:02:03 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	handle_color(t_fractol *fractol)
 {
 	static int	count = 0;
 
-	if(mlx_is_key_down(fractol->img.mlx, MLX_KEY_C))
+	if (mlx_is_key_down(fractol->img.mlx, MLX_KEY_C))
 	{
 		count++;
 		if (count % 6 == 1)
@@ -84,5 +84,8 @@ void	handle_key(mlx_key_data_t key, void *param)
 	if (fractol->help_img->enabled)
 		return ;
 	if (key.key == 'R')
+	{
 		init(fractol, fractol->type);
+		reset_colors(fractol);
+	}
 }
