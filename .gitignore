@@ -1,6 +1,6 @@
 fractol.pdf
 fractol
-objs/
+_obj/
 srcs/myLib/objs/
 srcs/myLib/libft.a
 srcs/myLib/make_output.txt
