@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:11:49 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/10 19:08:04 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/12 23:00:37 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ typedef struct s_img
 
 typedef uint32_t	(*t_color_fun)(int iter, int max_iter);
 
-typedef struct s_gradient_state
-{
-	uint8_t	gradient_value;
-	bool	gradient_direction;
-}	t_gradient_state;
-
 typedef struct s_fractol
 {
 	t_img				img;
@@ -73,7 +67,6 @@ typedef struct s_fractol
 	mlx_image_t			*help_img;
 	t_color_fun			color_fun;
 	t_fractal_type		type;
-	t_gradient_state	gradient_state;
 }	t_fractol;
 
 // Function declatrations for printing manuals
@@ -92,6 +85,7 @@ void			select_fractol(t_fractol *fractol, t_fractal_type fractal_type);
 t_fractal_type	get_fractal_type(t_fractol *fractol, int argc, char *str[]);
 
 // Function definitions for colors
+uint32_t		grad(double iter_norm, uint32_t s_color, uint32_t e_color);
 
 // Color Pallette
 uint32_t		color_mandelbrot(int iterations, int max_iter);

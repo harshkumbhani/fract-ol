@@ -6,7 +6,7 @@
 #    By: harsh <harsh@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2024/07/10 15:09:19 by harsh            ###   ########.fr        #
+#    Updated: 2024/07/12 23:06:04 by harsh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ vpath %.c $(SRC_DIRS)
 SRCS_MAIN		:= fractol.c
 SRCS_MAN		:= argument_manual.c
 SRCS_INIT		:= init.c
-SRCS_COLORS		:= colors.c color_pallette.c
+SRCS_COLORS		:= colors.c color_pallette.c color_grad.c
 SRCS_HOOKS		:= key_hooks.c mouse_hooks.c
 SRCS_FRACTOLS 	:= mandelbrot.c julia.c fern.c select_fractol.c
 SRCS_UTILS		:= utils.c
@@ -121,14 +121,15 @@ fclean: clean
 	fi
 	@$(LOG) "fcleaning libft directory"
 	@make fclean -C $(LIBFT_DIR)
-	@$(LOG) "Removing libmlx42.a library"
-	@rm -rf ./MLX42/build
+	@if [ -d  ./MLX42/build ]; then \
+		$(LOG) "Cleaning mlx library"; \
+		rm -rf ./MLX42/build; \
+	else \
+		$(LOG) "No mlx library to clean."; \
+	fi
 
 re: fclean all
 
 -include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
 .PHONY: all fclean clean re
-
-bonus:
-	@$(MAKE) BONUS=1 all
